@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo E-ticaret Sitesi - Extension Test Sayfası</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .header .badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .product {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .product-image {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            flex-shrink: 0;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-info h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .product-info p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: 800;
+            color: #10b981;
+            margin-bottom: 20px;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 24px;
+            margin-left: 10px;
+        }
+
+        .coupon-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .coupon-section h3 {
+            margin-bottom: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .coupon-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .coupon-input-group input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .coupon-input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .coupon-input-group button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .coupon-input-group button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .coupon-message {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .coupon-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .coupon-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .valid-coupons {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 2px solid #90cdf4;
+        }
+
+        .valid-coupons h4 {
+            color: #2c5282;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .coupon-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .coupon-code {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid #bee3f8;
+        }
+
+        .coupon-code span:first-child {
+            font-weight: 700;
+            color: #2c5282;
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        .coupon-code span:last-child {
+            color: #10b981;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .buy-button {
+            width: 100%;
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .buy-button:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .info-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .info-box h4 {
+            color: #856404;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box p {
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        .info-box ul {
+            margin-top: 15px;
+            margin-left: 20px;
+        }
+
+        .info-box li {
+            color: #856404;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛍️ Demo E-ticaret Sitesi</h1>
+            <span class="badge">Extension Test Sayfası</span>
+        </div>
+
+        <div class="product">
+            <div class="product-image">🎧</div>
+            <div class="product-info">
+                <h2>Premium Kablosuz Kulaklık</h2>
+                <p>
+                    Yüksek kaliteli ses, gürültü önleme özelliği ve 30 saat pil ömrü ile
+                    premium kablosuz kulaklık. Bluetooth 5.0 ve hızlı şarj desteği.
+                </p>
+                <div class="price">
+                    ₺1.299
+                    <span class="old-price">₺1.899</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="valid-coupons">
+            <h4>💡 Geçerli Kuponlar (Test için)</h4>
+            <div class="coupon-list">
+                <div class="coupon-code">
+                    <span>YENI50</span>
+                    <span>₺50 İndirim</span>
+                </div>
+                <div class="coupon-code">
+                    <span>KARGO0</span>
+                    <span>Ücretsiz Kargo</span>
+                </div>
+                <div class="coupon-code">
+                    <span>FLASH100</span>
+                    <span>₺100 İndirim</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="coupon-section">
+            <h3>🎫 İndirim Kuponu Var mı?</h3>
+            <div class="coupon-input-group">
+                <input
+                    type="text"
+                    id="couponInput"
+                    name="coupon_code"
+                    placeholder="Kupon kodunuzu girin"
+                    autocomplete="off"
+                >
+                <button id="applyCouponBtn">Uygula</button>
+            </div>
+            <div class="coupon-message" id="couponMessage"></div>
+        </div>
+
+        <button class="buy-button" onclick="alert('✅ Satın alma işlemi başarılı! (Demo)')">
+            Satın Al
+        </button>
+
+        <div class="info-box">
+            <h4>ℹ️ Extension'ı Test Etme</h4>
+            <p>Bu sayfa Coupon Finder Pro extension'ını test etmek için oluşturulmuştur.</p>
+            <ul>
+                <li>Extension'ın popup'ını açın (sağ üst köşedeki ikon)</li>
+                <li>Mevcut kuponları görün</li>
+                <li>Bir kupona tıklayın</li>
+                <li>Kuponun otomatik olarak yukarıdaki alana girildiğini görün</li>
+                <li>Extension sayfa içinde bildirim gösterecektir</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const validCoupons = {
+            'YENI50': '₺50 indirim uygulandı!',
+            'KARGO0': 'Ücretsiz kargo uygulandı!',
+            'FLASH100': '₺100 indirim uygulandı!'
+        };
+
+        document.getElementById('applyCouponBtn').addEventListener('click', function() {
+            const couponInput = document.getElementById('couponInput');
+            const couponMessage = document.getElementById('couponMessage');
+            const couponCode = couponInput.value.trim().toUpperCase();
+
+            if (!couponCode) {
+                showMessage('Lütfen bir kupon kodu girin!', 'error');
+                return;
+            }
+
+            if (validCoupons[couponCode]) {
+                showMessage('✅ ' + validCoupons[couponCode], 'success');
+            } else {
+                showMessage('❌ Geçersiz kupon kodu!', 'error');
+            }
+        });
+
+        function showMessage(text, type) {
+            const message = document.getElementById('couponMessage');
+            message.textContent = text;
+            message.className = `coupon-message ${type}`;
+            message.style.display = 'block';
+
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 5000);
+        }
+
+        // Enter tuşu ile uygula
+        document.getElementById('couponInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('applyCouponBtn').click();
+            }
+        });
+    </script>
+</body>
+</html>

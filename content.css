@@ -1,0 +1,129 @@
+/* Coupon Finder - Content Script Styles */
+
+/* Bildirim Container */
+.coupon-finder-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999999;
+    animation: couponSlideIn 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+@keyframes couponSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes couponSlideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* Bildirim İçerik */
+.coupon-notification-content {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 300px;
+    max-width: 400px;
+    border-left: 4px solid #667eea;
+}
+
+.coupon-finder-notification.success .coupon-notification-content {
+    border-left-color: #10b981;
+}
+
+.coupon-finder-notification.error .coupon-notification-content {
+    border-left-color: #ef4444;
+}
+
+.coupon-finder-notification.warning .coupon-notification-content {
+    border-left-color: #f59e0b;
+}
+
+.coupon-finder-notification.info .coupon-notification-content {
+    border-left-color: #3b82f6;
+}
+
+/* Bildirim İkon */
+.coupon-notification-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+/* Bildirim Metin */
+.coupon-notification-text {
+    flex: 1;
+    color: #1f2937;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+/* Kapat Butonu */
+.coupon-notification-close {
+    background: transparent;
+    border: none;
+    color: #6b7280;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.coupon-notification-close:hover {
+    background: #f3f4f6;
+    color: #1f2937;
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 768px) {
+    .coupon-finder-notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+    }
+
+    .coupon-notification-content {
+        min-width: auto;
+        max-width: none;
+    }
+}
+
+/* Highlight Effect (Kupon alanı vurgulaması) */
+@keyframes couponPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+    }
+}
